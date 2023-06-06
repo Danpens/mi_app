@@ -4,6 +4,10 @@ import {
   collection,
   addDoc,
   getDocs,
+  deleteDoc,
+  doc,
+  query,
+  where,
 } from "firebase/firestore/lite";
 // Siga este patrón para importar otros servicios de Firebase
 // import {} de 'Firebase/<service>';
@@ -52,22 +56,11 @@ const agregarDatosFirebase = async (data: Usuario): Promise<boolean> => {
 
 // Obtener una lista de ciudades de tu base de datos
 async function getLista(): Promise<Usuario[]> {
-  // const columnas = collection(
-  //   REFERENCIA_BD,
-  //   "fecha",
-  //   "hora",
-  //   "id_par",
-  //   "id_taller",
-  //   "nombre",
-  //   "taller"
-  // );
   // const data = await getDocs(columnas);
   const data = await getDocs(REFERENCIA_BD);
   console.log(data);
 
-  const lista: Usuario[] = data.docs.map(
-    (doc) => doc.data() as Usuario
-  );
+  const lista: Usuario[] = data.docs.map((doc) => doc.data() as Usuario);
   return lista;
 }
 
@@ -106,4 +99,30 @@ const obtenerListaDeDatosFirebase = async (): Promise<Respuesta> => {
   }
 };
 
-export { agregarDatosFirebase, obtenerListaDeDatosFirebase };
+const eliminarUsuarioFirebase = async (matricula: string): Promise<boolean> => {
+  try {
+    const db = getFirestore();
+    const usuariosRef = collection(db, "usuarios");
+
+    // Creamos la consulta para obtener el documento por su campo "matricula"
+    const q = query(usuariosRef, where("matricula", "==", matricula));
+
+    // Obtenemos los documentos que cumplen con la consulta
+    const querySnapshot = await getDocs(q);
+
+    // Recorremos los documentos y los eliminamos
+    querySnapshot.forEach(async (doc) => {
+      await deleteDoc(doc.ref);
+    });
+
+    return true;
+  } catch (error) {
+    console.log("Error al eliminar usuario:", error);
+    return false;
+  }
+};
+export {
+  agregarDatosFirebase,
+  obtenerListaDeDatosFirebase,
+  eliminarUsuarioFirebase,
+};

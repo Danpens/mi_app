@@ -30,6 +30,9 @@ import "./theme/global.css";
 import PaginaCamara from "./pages/PaginaCamara";
 import PaginaIngresarDatos from "./pages/PaginaIngresarDatos";
 import PaginaLista from "./pages/PaginaLista";
+import PaginaMapaCurricular from "./pages/PaginaMapaCurricular";
+import PaginaAlumnos from "./pages/PaginaAlumnos";
+import PaginaEliminar from "./pages/PaginaEliminar";
 
 setupIonicReact();
 
@@ -55,6 +58,18 @@ const App: React.FC = () => {
             {/* Ruta para ver la lista de datos */}
             <Route path="/pagina/lista" exact={true}>
               <PaginaLista />
+            </Route>
+            {/* Ruta para ver la lista de eliminación */}
+            <Route path="/pagina/eliminar" exact={true}>
+              <PaginaEliminar />
+            </Route>
+            {/* Ruta para ver el mapa curricular */}
+            <Route path="/pagina/mapa" exact={true}>
+              <PaginaMapaCurricular />
+            </Route>
+            {/* Ruta para ver a los integrantes */}
+            <Route path="/pagina/integrantes" exact={true}>
+              <PaginaAlumnos />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

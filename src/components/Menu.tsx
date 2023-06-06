@@ -12,8 +12,15 @@ import {
   accessibility,
   mailOutline,
   mailSharp,
+  mapOutline,
+  mapSharp,
   paperPlaneOutline,
   paperPlaneSharp,
+  personAddOutline,
+  personAddSharp,
+  trailSignSharp,
+  trashOutline,
+  trashSharp,
 } from "ionicons/icons";
 import "./Menu.css";
 
@@ -44,6 +51,24 @@ const paginas: Pagina[] = [
     url: "/pagina/lista",
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp,
+  },
+  {
+    title: "Eliminar",
+    url: "/pagina/eliminar",
+    iosIcon: trashOutline,
+    mdIcon: trashSharp,
+  },
+  {
+    title: "Mapa curricular",
+    url: "/pagina/mapa",
+    iosIcon: mapOutline,
+    mdIcon: mapSharp,
+  },
+  {
+    title: "Integrantes",
+    url: "/pagina/integrantes",
+    iosIcon: personAddOutline,
+    mdIcon: personAddSharp,
   },
 ];
 
